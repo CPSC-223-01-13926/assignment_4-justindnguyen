@@ -51,25 +51,33 @@ def tot_rain(data, date):
     return sum(rainfalls) if len(rainfalls) else None
     
 def report_daily(data, date):
-    print("="*24, "{:^14}".format("DAILY REPORT"), "="*24)
-    print("{:<20}  {:^8}  {:>12}  {:>8}  {:>8}".format("Date", "Time", "Temperature", "Humidity", "Rainfall"))
-    print("{:<20}  {:^8}  {:>12}  {:>8}  {:>8}".format("="*20, "="*8, "="*12, "="*8, "="*8))
+    print("="*25, "{}".format("DAILY REPORT"), "="*24)
+    print("{:<20}  {:>8}  {:>11}  {:>8}  {:>8}".format("Date", "Time", "Temperature", "Humidity", "Rainfall"))
+    print("{:<20}  {:>8}  {:>11}  {:>8}  {:>8}".format("="*20, "="*8, "="*11, "="*8, "="*8))
+    #========================= DAILY REPORT ========================
+    #========================= DAILY REPORT ========================
+    #Date                      Time  Temperature  Humidity  Rainfall
+    #====================  ========  ===========  ========  ========
     
     for i in data.keys():
         if i[:8] == date:
             fdate = "{} {}, {}".format(month_name[int(i[4:6])], int(i[6:8]), int(i[:4]))
-            ftime = "{}:{}:{}".format(int(i[8:10]), int(i[10:12]), int(i[12:14]))
+            ftime = "{:02d}:{:02d}:{:02d}".format(int(i[8:10]), int(i[10:12]), int(i[12:14]))
             temp = data[i]["t"]
             humidity = data[i]["h"]
             rainfall = data[i]["r"]
-            print("{:<20}  {:^8}  {:>12}  {:>8}  {:>8}".format(fdate, ftime, temp, humidity, rainfall))
+            rainfall2 = "{:.2f}".format(float(rainfall))
+            print("{:<20}  {:^8}  {:>11}  {:>8}  {:>8}".format(fdate, ftime, temp, humidity, rainfall2))
     print()
         
 def report_historical(data):
-    print("="*28, "{:^20}".format("HISTORICAL REPORT"), "="*28)
-    print("{:<20}  {:>12}  {:>12}  {:>8}  {:>8}  {:>8}".format("", "Maximum", "Minimum", "Maximum", "Minimum", "Total") + "\n{:<20}  {:>12}  {:>12}  {:>8}  {:>8}  {:>8}".format("Date", "Temperature", "Temperature", "Humidity", "Humidity", "Rainfall"))
-    print("{:<20}  {:>12}  {:>12}  {:>8}  {:>8}  {:>8}".format(
-            "="*20, "="*12, "="*12, "="*8, "="*8, "="*8))
+    print("="*30, "{}".format("HISTORICAL REPORT"), "="*27)
+    print("{:<20}  {:>11}  {:>11}  {:>8}  {:>8}  {:>8}".format("", "Minimum", "Maximum", "Minimum", "Maximum", "Total") + "\n{:<20}  {:>11}  {:>11}  {:>8}  {:>8}  {:>8}".format("Date", "Temperature", "Temperature", "Humidity", "Humidity", "Rainfall"))
+    print("{:<20}  {:>11}  {:>11}  {:>8}  {:>8}  {:>8}".format("="*20, "="*11, "="*11, "="*8, "="*8, "="*8))
+    #============================== HISTORICAL REPORT ===========================
+	#		                   Minimum      Maximum   Minumum   Maximum     Total
+    #Date                  Temperature  Temperature  Humidity  Humidity  Rainfall
+    #====================  ===========  ===========  ========  ========  ========
     
     historical_data = []
     for i in data.keys():
@@ -80,7 +88,8 @@ def report_historical(data):
             max_hum = max_humidity(data, i[:8])
             min_hum = min_humidity(data, i[:8])
             total_rain = tot_rain(data, i[:8])
-            print("{:<20}  {:>12}  {:>12}  {:>8}  {:>8}  {:>8}".format(fdate, max_temp, min_temp, max_hum, min_hum, total_rain))
+            total_rain2 = "{:.2f}".format(float(total_rain))
+            print("{:<20}  {:>11}  {:>11}  {:>8}  {:>8}  {:>8}".format(fdate, min_temp, max_temp, min_hum, max_hum, total_rain2))
             historical_data.append(fdate)
     print()
             
