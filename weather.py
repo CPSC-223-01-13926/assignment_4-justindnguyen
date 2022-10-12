@@ -5,49 +5,49 @@ from calendar import month_name
 
 def read_data(filename):
     try:
-        with open(filename, "r") as file:
+        with open(filename, 'r') as file:
             data = json.load(file)
             return data
     except FileNotFoundError:
         return {}
     
 def write_data(data, filename):
-    with open(filename, "w") as file:
+    with open(filename, 'w') as file:
         json.dump(data, file)
 
 def max_temperature(data, date):
     temp = []
     for i in data:
         if date == i[:8]:
-            temp.append(data[i]["t"])
+            temp.append(data[i]['t'])
     return max(temp) if len(temp) else None
             
 def min_temperature(data, date):
     temp = []
     for i in data:
         if date == i[:8]:
-            temp.append(data[i]["t"])
+            temp.append(data[i]['t'])
     return min(temp) if len(temp) else None
 
 def max_humidity(data, date):
     humidity = []
     for i in data:
         if date == i[:8]:
-            humidity.append(data[i]["h"])
+            humidity.append(data[i]['h'])
     return max(humidity) if len(humidity) else None
 
 def min_humidity(data, date):
     humidity = []
     for i in data:
         if date == i[:8]:
-            humidity.append(data[i]["h"])
+            humidity.append(data[i]['h'])
     return min(humidity) if len(humidity) else None
     
 def tot_rain(data, date):
     rainfalls = []
     for i in data:
         if date == i[:8]:
-            rainfalls.append(data[i]["r"])
+            rainfalls.append(data[i]['r'])
     return sum(rainfalls) if len(rainfalls) else None
     
 def report_daily(data, date):
