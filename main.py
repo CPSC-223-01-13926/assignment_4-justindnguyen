@@ -25,11 +25,11 @@ while True:
     elif (menu_choice == 3):
         print()
         date = input("Enter date (YYYYMMDD): ")
-        weather.report_daily(data, date)
+        print(weather.report_daily(data, date))
         
     elif (menu_choice == 4):
         print()
-        weather.report_historical(data)
+        print(weather.report_historical(data))
         
     elif (menu_choice == 5):
         break
